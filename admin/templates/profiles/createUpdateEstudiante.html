@@ -1,0 +1,148 @@
+{% extends 'general/master.html' %}
+{% block script %}
+{% endblock %}
+{% block content %}
+<form class="container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <h1>
+            Estudiantes
+        </h1>
+    </div>
+    <div class="row" >
+        <div class="col-4">
+            <div class="form-group">
+                <label>Nombres</label>
+                <input type = "text" class = "form-control" name="first_name" autofocus value="{% if form1.errors or form.errors %}{{form.first_name.value}}{% else %}{{estudiante.user.first_name}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.first_name.errors %}
+                     {{form.first_name.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Apellidos</label>
+                <input type = "text" class = "form-control" name="last_name"  value="{% if form1.errors or form.errors %}{{form.last_name.value}}{% else %}{{estudiante.user.last_name}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.last_name.errors %}
+                     {{form.last_name.errors}}
+                    {%endif%}
+                </div>
+            </div> 
+        </div>
+        <div class="col-4 {% if estudiante %} d-none {% endif %}">
+            <div class="form-group">
+                <label>Correo</label>
+                <input type = "email" class = "form-control" name="email"  value="{% if form1.errors or form.errors %}{{form.email.value}}{% else %}{{estudiante.user.email}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.email.errors or form.username.errors%}
+                    {{form.email.errors}}
+                    {{form.username.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row {% if estudiante %} d-none {% endif %}" >
+        <div class="col-6">
+            <label>Contraseña</label>
+            <div class="input-group">
+                <input type="password" name="new_password" class="form-control">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white border-left-0">
+                    <i class="fa js-eye-show text-Cprimary fa-eye-slash"></i>
+                  </span>
+                </div>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.new_password.errors %}
+                     {{form.new_password.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Confirmar Contraseña</label>
+            <div class="input-group">
+                <input type="password" name="repeat_password" class="form-control">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white border-left-0">
+                    <i class="fa js-eye-show text-Cprimary fa-eye-slash"></i>
+                  </span>
+                </div>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.repeat_password.errors %}
+                     {{form.repeat_password.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3" >
+        <div class="col-4">
+            <div class="form-group">
+                <label>Tipo de Documento</label>
+                <select class="form-control" name="tipo_documento">
+                    <option> - - - - - - - -</option>
+                {% for tipo_documento in tipo_documentos %}
+                    <option value="{{tipo_documento.id}}" {% if form.errors or form1.errors %}{%if form1.tipo_documento.value|floatformat:'0' == tipo_documento.id|floatformat:'0' %}  selected {% endif %}{% elif tipo_documento.id|floatformat:'0' == estudiante.tipo_documento.id|floatformat:'0'%}selected{% endif %}>{{tipo_documento.nombre_documento}}</option>
+                {% endfor %}
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.tipo_documento.errors %}
+                     {{form1.tipo_documento.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Número de Documento</label>
+                <input type = "text" class = "form-control" name="numero_documento"  value="{% if form1.errors or form.errors %}{{form1.numero_documento.value}}{% else %}{{estudiante.numero_documento}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.numero_documento.errors %}
+                     {{form1.numero_documento.errors}}
+                    {%endif%}
+                </div>
+            </div> 
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Grado</label>
+                <select class="form-control" name="grado">
+                    <option> - - - - - - - - -</option>
+                {% for grado in grados %}
+                    <option value="{{grado.id}}" {% if form.errors or form1.errors %}{%if form1.grado.value|floatformat:'0' == grado.id|floatformat:'0' %}  selected {% endif %}{% elif grado.id|floatformat:'0' == estudiante.grado.id|floatformat:'0'%}selected{% endif %}>{{grado.nombre_grado}}</option>
+                {% endfor %}
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.grado.errors %}
+                     {{form1.grado.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Estado</label>
+                <select class="form-control" name="is_active">
+                   <option value="True"{% if form1.errors or form.errors %}{% if form.is_active == True %} selected {%endif%} {% elif estudiante.is_active == True  %} selected {% endif %}>Activo</option>
+                   <option value="False" {% if form1.errors or form.errors %}{% if form.is_active == False %} selected {%endif%}{% elif estudiante.is_active == False  %} selected {% endif %}>Inactivo</option>
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.is_active.errors %}
+                     {{form.is_active.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-0 my-3">
+        <button type="submit" class="col-2 btn btn-sm bg-Cprimary btn-block text-white ">Guardar
+            <i class="fa fa-check pl-1"></i>
+        </button>
+        <a class="text-white col-2 btn btn-sm bg-Csecondary text-white ml-2" href="{% url 'profiles:readEstudiante' %}"> Cancelar <i class="fa fa-times pl-1"></i></a>
+    </div>
+</form>
+{% endblock %}

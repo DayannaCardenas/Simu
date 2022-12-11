@@ -1,0 +1,128 @@
+{% load staticfiles %}
+<nav class="row container-fluid navbar navbar-expand-lg  bg-Cgraylight py-0 bg-dark">
+  <div class="text-white ml-2 ml-md-5 col-7 col-md-2">
+    <a class="ml-md-5" href="">
+      <a href="http://127.0.0.1:8000/profiles/home/">
+        <img src="{% static 'images/logo_simusaber.png' %}"  class="h-50 w-50"> 
+      </a>
+    </a>
+  </div>
+  <button class="navbar-toggler mr-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse mt-3 mt-md-0 small col-md-8" id="navbarSupportedContent">
+    <ul class="navbar-nav text-md-center  text-left flex-grow-1 d-flex justify-content-md-center">
+      <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class= href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-home fa-3x text-Csecondary">
+              <div class="h6 m-0">
+                <h5>Inicio</h5>
+              </div>
+            </i>
+          </a>
+        </div>
+      </li>
+      <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-book fa-3x text-Cprimary">
+              <div class="h6 m-0">
+                <h5>Pruebas</h5>
+              </div>
+            </i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item " href="{% url 'prueba:readMateria'%}">Materias</a> 
+            <a class="dropdown-item " href="{% url 'prueba:readGrado'%}">Grados</a> 
+          </div>
+        </div>
+      </li>
+      <!-- <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-hand-paper-o fa-3x text-Csecondary">
+              <div class="h6 m-0">
+                <h5>Apoyo</h5>
+              </div>
+            </i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          </div>
+        </div>
+      </li> -->
+      <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-users fa-3x text-Cprimary">
+              <div class="h6 m-0">
+                <h5>Perfiles</h5>
+              </div>
+            </i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item " href="{% url 'profiles:readTipoDocumento'%}">Tipos de Documentos</a> 
+            <a class="dropdown-item " href="{% url 'profiles:readEstudiante'%}">Estudiantes</a> 
+          </div>
+        </div>
+      </li>
+      <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-star-half-o fa-3x text-Csecondary">
+              <div class="h6 m-0">
+                <h5>Estados</h5>
+              </div>
+            </i>
+          </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <a class="dropdown-item " href="{% url 'states:readStates'%}">Estados</a> 
+          </div>
+        </div>
+      </li>
+      <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-server fa-3x text-Cprimary">
+              <div class="h6 m-0">
+                <h5>Banco Pregunta</h5>
+              </div>
+            </i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item " href="{% url 'bancoPregunta:readResultados'%}">Resultados</a>
+            <a class="dropdown-item " href="{% url 'bancoPregunta:readPregunta'%}">Preguntas</a>
+            <a class="dropdown-item " href="{% url 'bancoPregunta:readRespuestas'%}">Respuestas</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="justify-content-md-end justify-content-center">
+      <ul class="navbar-nav text-right flex-grow-1 my-0 d-flex justify-content-end">
+        <li class="nav-item text-center mx-2 nav-item dropdown">
+          <div class="row"> 
+            <div class="nav-link col-12 col-md-3 mt-md-2">
+              <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle-o fa-3x text-Ctertiary">
+                  <div class="h6 m-0">
+                    <h6 >{{user.get_full_name}}</h6>
+                    <h6 >({{user.groups.all.0.name}})</h6>
+                  </div>
+                </i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+                <a class="dropdown-item " href="{% url 'profiles:logout' %}">Cerrar sesión<i class=" ml-2 fa fa-sign-in text-Cprimary " aria-hidden="true"></i></a>
+              </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

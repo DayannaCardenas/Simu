@@ -1,0 +1,95 @@
+{% extends 'general/master.html' %}
+{% block script %}
+{% endblock %}
+{% block content %}
+<form class="container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container-fluid">
+        <h1>
+            Preguntas
+        </h1>       
+    </div>
+    <div class="row" >
+        <div class="col-6">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type = "text" class="form-control" name="nombre" autofocus value="{% if form.errors %}{{form.nombre.value}}{% else %}{{estudiante.nombre}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.nombre.errors %}
+                     {{form.nombre.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type = "TextField"  class="form-control" name="descripcion"  value="{% if  form.errors %}{{form.descripcion.value}}{% else %}{{estudiante.descripcion}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.descripcion.errors %}
+                     {{form.descripcion.errors}}
+                    {%endif%}
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Materia</label>
+                <select class="form-control" name="materia">
+                    <option> - - - - - - - -</option>
+                {% for materia in materias %}
+                    <option value="{{materia.id}}" {% if form.errors %}{%if form.materia.value|floatformat:'0' == materia.id|floatformat:'0' %}  selected {% endif %}{% elif materia.id|floatformat:'0' == estudiante.materia.id|floatformat:'0'%}selected{% endif %}>{{materia.nombre_materia}}</option>
+                {% endfor %}
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.materia.errors %}
+                     {{form.materia.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Grado</label>
+                <select class="form-control" name="grado">
+                    <option> - - - - - - - - -</option>
+                {% for grado in grados %}
+                    <option value="{{grado.id}}" {% if form.errors%}{%if form.grado.value|floatformat:'0' == grado.id|floatformat:'0' %}  selected {% endif %}{% elif grado.id|floatformat:'0' == estudiante.grado.id|floatformat:'0'%}selected{% endif %}>{{grado.nombre_grado}}</option>
+                {% endfor %}
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.grado.errors %}
+                     {{form.grado.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Estado</label>
+                <select class="form-control" name="estado">
+                    <option> - - - - - - - - -</option>
+                {% for estado in estados %}
+                    <option value="{{estado.id}}" {% if form.errors%}{%if form.estado.value|floatformat:'0' == estado.id|floatformat:'0' %}  selected {% endif %}{% elif estado.id|floatformat:'0' == pregunta.estado.id|floatformat:'0'%}selected{% endif %}>{{estado.nombre_estado}}</option>
+                {% endfor %}
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.estado.errors %}
+                     {{form.estado.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-0 my-3 container-fluid">
+        <button type="submit" class="col-2 btn btn-sm bg-Cprimary btn-block text-white">Guardar
+            <i class="fa fa-check pl-1"></i>
+        </button>
+        <a class="text-white col-2 btn btn-sm bg-Csecondary text-white ml-2" href="{% url 'bancoPregunta:readPregunta' %}"> Cancelar <i class="fa fa-times pl-1"></i></a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'general/master.html' %}
+{% block script %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row mx-0 my-3">
+    <div class="col-10 px-0">
+      <h2><b>Estudiantes</b></h2>
+    </div>
+    <div class="col-2">
+      <a href="{% url 'profiles:createEstudiante' %}" class="btn bg-Cprimary btn-block text-truncate text-white" ><i class="fa fa-plus-circle pr-2"></i><span>Añadir</span></a>
+    </div>
+  </div>
+  <div class="row mx-0">
+    <div class="col-12 p-0">
+      <div class="table-responsive">
+        <div class="table-wrapper">
+          <div class="row mx-0">
+            <table class="table table-hover">
+              <thead>
+                <tr class="bg-Cprimary text-justify text-light shadow">
+                  <th class="align-middle text-center">ID</th>
+                  <th class="align-middle text-center">Nombres</th>
+                  <th class="align-middle text-center">Apellidos</th>
+                  <th class="align-middle text-center">Correo</th>
+                  <th class="align-middle text-center">Tipo de Documento</th>
+                  <th class="align-middle text-center">Número de Documento</th>
+                  <th class="align-middle text-center">Grado</th>
+                  <th class="align-middle text-center">Estado</th>
+                  <th class="align-middle text-center">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for estudiante in estudiantes %}
+                <tr class="table-light text-justify">
+                  <td class="align-middle text-center">{{estudiante.user.id}}</td>
+                  <td class="align-middle text-left">{{estudiante.user.first_name}}</td>
+                  <td class="align-middle text-left">{{estudiante.user.last_name}}</td>
+                  <td class="align-middle text-left">{{estudiante.user.email}}</td>
+                  <td class="align-middle text-left">{{estudiante.tipo_documento}}</td>
+                  <td class="align-middle text-left">{{estudiante.numero_documento}}</td>
+                  <td class="align-middle text-left">{{estudiante.grado}}</td>
+                  <td class="align-middle text-left">{%if estudiante.user.is_active %}Activo{%else%}Inactivo{%endif%}
+                  </td>
+                  <td class="align-middle text-left"><a class="fa fa-pencil-square-o text-Cprimary px-2"  href="{% url 'profiles:updateEstudiante' estudiante.user.id %}"></a>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-10 offset-1 col-md-8 offset-md-2 px-1">
+      <div class="row">
+        <div class="col-12 px-1">
+          <div class="row mx-0 d-flex justify-content-center">
+            {% if estudiantes.has_previous %}
+            <a class="border-0 text-Cprimary d-flex justify-content-center align-items-center px-2 mx-1 my-1 paginatorH"
+              href="?{{request.GET.urlencode}}&page=1"><i class="fa fa-fast-backward"></i></a>
+            {% endif %}
+            {% if estudiantes.has_previous %}
+            <a class="border-0 text-Cprimary d-flex justify-content-center align-items-center px-2 mx-1 my-1 paginatorH"
+              href="?{{request.GET.urlencode}}&page={{ estudiantes.previous_page_number }}"><i
+                class="fa fa-step-backward"></i></a>
+            {% endif %}
+            {% for i in estudiantes.paginator.page_range %}
+            {% if estudiantes.number == i %}
+            <a class="rounded-circle bg-Cprimary text-white d-flex justify-content-center align-items-center px-2 mx-1 my-1 paginatorH"
+              href="" disabled>{{ i }}</a>
+            {% else %}
+            <a class="rounded-circle border-0 text-black-50 d-flex justify-content-center align-items-center px-2 mx-1 my-1 paginatorH"
+              href="?{{request.GET.urlencode}}&page={{ i }}">{{ i }}</a>
+            {% endif %}
+            {% endfor %}
+            {% if estudiantes.has_next%}
+            <a class="border-0 text-Cprimary d-flex justify-content-center align-items-center px-2 mx-1 my-1 paginatorH"
+              href="?{{request.GET.urlencode}}&page={{ estudiantes.next_page_number }}"><i
+                class="fa fa-step-forward"></i></a>
+            {% endif %}
+            {% if estudiantes.has_next %}
+            <a class="border-0 text-Cprimary d-flex justify-content-center align-items-center px-2 mx-1 my-1 paginatorH"
+              href="?{{request.GET.urlencode}}&page={{ estudiantes.paginator.num_pages }}"><i
+                class="fa fa-fast-forward"></i></a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
