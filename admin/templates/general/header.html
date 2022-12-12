@@ -16,11 +16,13 @@
         <div class="nav-link">
           <a class= href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-home fa-3x text-Csecondary">
-              <div class="h6 m-0">
-                <h5>Inicio</h5>
-              </div>
-            </i>
+            <a href="http://127.0.0.1:8000/profiles/home/">
+              <i class="fa fa-home fa-3x text-Csecondary">
+                <div class="h6 m-0">
+                  <h5>Inicio</h5>
+                </div>
+              </i>
+            </a>
           </a>
         </div>
       </li>
@@ -35,8 +37,9 @@
             </i>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item " href="{% url 'prueba:readPrueba'%}">Pruebas</a>  
             <a class="dropdown-item " href="{% url 'prueba:readMateria'%}">Materias</a> 
-            <a class="dropdown-item " href="{% url 'prueba:readGrado'%}">Grados</a> 
+            <a class="dropdown-item " href="{% url 'prueba:readGrado'%}">Grados</a>
           </div>
         </div>
       </li>
