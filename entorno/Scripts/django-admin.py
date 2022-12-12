@@ -1,4 +1,4 @@
-#!c:\users\dayanna\desktop\proyecto_final_simusaber\entorno\scripts\python.exe
+#!C:\Users\Walter Osorio\Desktop\EntornoSimu\Simu\entorno\Scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":

@@ -1,0 +1,38 @@
+{% extends 'general/master.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mx-0 mt-4 mb-2">
+        <div class="col-6 col-md-0 px-0">
+            <h2><b> Materias </b></h2>
+        </div>
+    </div>
+    <div class="row mx-0">
+        <div class="col-12 p-0">
+          <div class="table-responsive">
+            <div class="table-wrapper">
+              <div class="row mx-0">
+                  <h1>Español</h1>
+                  <tbody >
+                    {% for pregunta in preguntasEspanol %}
+                    <tr class="table-light text-justify">
+                        <td class="align-middle text-center">{{pregunta.descripcion}}</td>
+                      </td>
+                    </tr><br></br>                            
+                    {% endfor %}
+                  </tbody>
+                  <h1>Matematicas</h1>
+                  <tbody >
+                    {% for pregunta in preguntasMatematicas %}
+                    <tr class="table-light text-justify">
+                        <td class="align-middle text-center">{{pregunta.descripcion}}</td>
+                      </td>
+                    </tr><br></br>                          
+                    {% endfor %}
+                  </tbody>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}

@@ -5,6 +5,7 @@ from apps.prueba.views import *
 urlpatterns = [
     path('readMateria/', read_materia_view, name='readMateria'),
     path('readGrado/', read_grado_view, name='readGrado'),
+    path('readPrueba/', read_prueba_view, name='readPrueba'),
     # path('readDepartament/', read_departament_view, name='readDepartament'),
     # path('readCity/', read_city_view, name='readCity'),
     # path('readOffice/', read_office_view, name='readOffice'),

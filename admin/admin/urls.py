@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profiles/', include(('apps.profiles.urls', 'profiles'), namespace="profiles")),
     path('states/', include(('apps.states.urls', 'states'), namespace="states")),
-    path('prueba/', include(('apps.prueba.urls', 'locations'), namespace="prueba")),
+    path('prueba/', include(('apps.prueba.urls', 'prueba'), namespace="prueba")),
     path('bancoPregunta/', include(('apps.bancoPregunta.urls', 'bancoPregunta'), namespace="bancoPregunta")),
    
 ]

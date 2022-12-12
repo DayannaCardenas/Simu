@@ -45,6 +45,9 @@ class Pregunta(models.Model):
     materia=models.ForeignKey('prueba.Materia', blank=True, on_delete=models.CASCADE, null=True)
     grado=models.ForeignKey('prueba.Grado', blank=True, on_delete=models.CASCADE, null=True)
     
+    def __str__(self):
+        return self.nombre
+    
 class Respuesta(models.Model):
     
     pregunta=models.ForeignKey(Pregunta, blank=True, on_delete=models.CASCADE, null=True)
